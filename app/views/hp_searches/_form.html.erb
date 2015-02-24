@@ -1,0 +1,25 @@
+<%= form_for(@hp_search) do |f| %>
+  <% if @hp_search.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@hp_search.errors.count, "error") %> prohibited this hp_search from being saved:</h2>
+
+      <ul>
+      <% @hp_search.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :zipcode %><br>
+    <%= f.number_field :zipcode %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

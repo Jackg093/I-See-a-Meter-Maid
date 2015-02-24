@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Homepage Location Searches!</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Zipcode</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @hp_searches.each do |hp_search| %>
+      <tr>
+        <td><%= hp_search.name %></td>
+        <td><%= hp_search.zipcode %></td>
+        <td><%= link_to 'Show', hp_search %></td>
+        <td><%= link_to 'Edit', edit_hp_search_path(hp_search) %></td>
+        <td><%= link_to 'Destroy', hp_search, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Hp search', new_hp_search_path %>
