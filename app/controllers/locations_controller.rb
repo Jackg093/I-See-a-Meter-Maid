@@ -1,11 +1,16 @@
 class LocationsController < ApplicationController
   before_action :set_location, only: [:show, :edit, :update, :destroy]
+def index
+  if params[:search].present?
+    @locations = Location.near(params[:search], 50, :order => :distance)
+  else
+    @locations = Location.all
+  end
+end
 
   # GET /locations
   # GET /locations.json
-  def index
-    @locations = Location.all
-  end
+ 
 
   # GET /locations/1
   # GET /locations/1.json
@@ -72,13 +77,6 @@ class LocationsController < ApplicationController
       params.require(:location).permit(:address, :latitude, :longitude)
     end
 
-def index
-  if params[:search].present?
-    @locations = Location.near(params[:search], 50, :order => :distance)
-  else
-    @locations = Location.all
-  end
-end
 
 
 

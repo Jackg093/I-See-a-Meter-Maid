@@ -1,7 +1,12 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Listing Locations</h1>
-
+<%= form_tag locations_path, :method => :get do %>
+  <p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search Near", :name => nil %>
+  </p>
+<% end %>
 <table>
   <thead>
     <tr>
@@ -27,10 +32,5 @@
 </table>
 
 <br>
-<%= form_tag locations_path, :method => :get do %>
-  <p>
-    <%= text_field_tag :search, params[:search] %>
-    <%= submit_tag "Search Near", :name => nil %>
-  </p>
-<% end %>
+
 <%= link_to 'New Location', new_location_path %>
