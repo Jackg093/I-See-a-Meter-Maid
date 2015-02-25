@@ -10,7 +10,9 @@ end
 
   # GET /locations
   # GET /locations.json
- 
+ def maps 
+@locations = Location.all
+ end
 
   # GET /locations/1
   # GET /locations/1.json

@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
-  resources :locations
+  resources :locations do 
+    collection do 
+      get :maps
+      
+    end
+  end
 
   devise_for :users
   resources :hp_searches

@@ -1,7 +1,18 @@
 <p id="notice"><%= notice %></p>
 
 <%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@location.latitude}%2C#{@location.longitude}" %>
-
+<div id="map-canvas"></div>
+   <script type="text/javascript">
+      function initialize() {
+        var mapOptions = {
+          center: { lat:<%=@location.latitude  %>, lng: <%= @location.longitude %>},
+          zoom: 8
+        };
+        var map = new google.maps.Map(document.getElementById('map-canvas'),
+            mapOptions);
+      }
+      google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
 <h3>Nearby locations</h3>
 <ul>
 <% for location in @location.nearbys(10) %>

@@ -1,0 +1,13 @@
+
+<div id="map-canvas"></div>
+   <script type="text/javascript">
+      function initialize() {
+        var mapOptions = {
+          center: { lat:<%=@locations.first.latitude  %>, lng: <%= @locations.first.longitude %>},
+          zoom: 8
+        };
+        var map = new google.maps.Map(document.getElementById('map-canvas'),
+            mapOptions);
+      }
+      google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
