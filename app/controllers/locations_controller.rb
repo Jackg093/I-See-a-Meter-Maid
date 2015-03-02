@@ -11,7 +11,7 @@ end
   # GET /locations
   # GET /locations.json
  def maps 
-@locations = Location.all
+  @locations = Location.all
  end
 
   # GET /locations/1
