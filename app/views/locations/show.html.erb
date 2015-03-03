@@ -9,10 +9,7 @@
           center: { lat:<%=@location.latitude  %>, lng: <%= @location.longitude %>},
           zoom: 8
         };
-        
-       
-
-        var map = new google.maps.Map(document.getElementById('map-canvas'),
+                  var map = new google.maps.Map(document.getElementById('map-canvas'),
             mapOptions);
         var GeoMarker = new GeolocationMarker(map);
        GeoMarker.setCircleOptions({fillColor: '#808080'});
@@ -29,7 +26,7 @@
         GeoMarker.setMap(map);
       }
       google.maps.event.addDomListener(window, 'load', initialize);
-
+     
     </script>
 <h1>
  <button id="maptrigger">My Location</button> 
