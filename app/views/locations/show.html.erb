@@ -5,33 +5,143 @@
 <div id="map-canvas"></div>
    <script type="text/javascript">
       function initialize() {
-        var mapOptions = {
-          center: { lat:<%=@location.latitude  %>, lng: <%= @location.longitude %>},
-          zoom: 8
-        };
-                  var map = new google.maps.Map(document.getElementById('map-canvas'),
-            mapOptions);
-         var Geomarker = " " ;
+         console.log('page initialize');
+         window.mapOptions = {
+           center: { lat:<%=@location.latitude  %>, lng: <%= @location.longitude %>},
+           zoom: 8
+         };
 
-          $("#maptrigger").click(function() {
+      //   var goldStar = {
+      //     path: 'M 125,5 155,90 245,90 175,145 200,230 125,180 50,230 75,145 5,90 95,90 z',
+      //     fillColor: 'red',
+      //     fillOpacity: 1.2,
+      //     scale: 0.05,
+      //     strokeColor: 'black',
+      //     strokeWeight: 1.25
+      //   };
 
+        // var canvas = document.getElementById('map-canvas');
+        // if (!canvas) { 
+        //   console.log("no canvas found");
+        //   return;
+        // }
 
-          GeoMarker = new GeolocationMarker(map);
-        GeoMarker.setCircleOptions({fillColor: '#808080'})
-         google.maps.event.addListenerOnce(GeoMarker, 'position_changed', function() {
-           map.setCenter(this.getPosition());
-          map.fitBounds(this.getBounds());
-        });
-  })
-        google.maps.event.addListener(GeoMarker, 'geolocation_error', function(e) {
-          alert('There was an error obtaining your position. Message: ' + e.message);
-        });
+        // window.map = new google.maps.Map(document.getElementById('map-canvas'),
+        //     mapOptions);
+      //   var GeoMarker = new GeolocationMarker(map);
+      //   GeoMarker.setCircleOptions({fillColor: '#808080'});
 
-        GeoMarker.setMap(map);
+      //   window.geomarker = GeoMarker;
+
+ 
+      //   $("#maptrigger").click(function() {
+      //     console.log('clicked trigger');
+      //     console.dir(GeoMarker);
+
+      //     map.setCenter(GeoMarker.getPosition());
+      //     var bounds = GeoMarker.getBounds();
+      //     if (bounds) {
+      //       map.fitBounds(bounds);
+      //     }
+
+      //     var marker = new google.maps.Marker({
+      //       position: map.getCenter(),
+      //       icon: goldStar,
+      //       map: map
+      //     });
+      //   })
+
+      //   google.maps.event.addListener(GeoMarker, 'geolocation_error', function(e) {
+      //     alert('There was an error obtaining your position. Message: ' + e.message);
+      //   });
+
+      //   //GeoMarker.setMap(map);
+
+      //   // console.log('create marker');
+      //   // console.dir(map);
+      //   // var marker = new google.maps.Marker({
+      //   //   position: map.getCenter(),
+      //   //   icon: goldStar,
+      //   //   map: map
+      //   // });
+
       }
-      google.maps.event.addDomListener(window, 'load', initialize);
-     
+
+      // //google.maps.event.addDomListener(window, 'load', initialize);
+      //$(initialize);
+      //$(document).on('page:load', initialize);
+      initialize();
+   
+
+   // <!-- working code ending here -->
+ 
+// function initialize() {
+  // var mapOptions = {
+  //   zoom: 4,
+  //   center: new google.maps.LatLng(-25.363882, 131.044922)
+  // };
+
+  // var map = new google.maps.Map(document.getElementById('map-canvas'),
+  //     mapOptions);
+// 
+  // var goldStar = {
+  //   path: 'M 125,5 155,90 245,90 175,145 200,230 125,180 50,230 75,145 5,90 95,90 z',
+  //   fillColor: 'red',
+  //   fillOpacity: 1.2,
+  //   scale: 0.05,
+  //   strokeColor: 'black',
+  //   strokeWeight: 1.25
+  // };
+
+  // var marker = new google.maps.Marker({
+  //   position: map.getCenter(),
+  //   icon: goldStar,
+  //   map: map
+  // });
+
+// }
+
+
+
+
+
+
+
+
+// function star() {
+//   var mapOptions5 = {
+    
+//   center: { lat:<%=@location.latitude  %>, lng: <%= @location.longitude %>},
+//     zoom: 4,
+//     //center to current location
+//   };
+// var map = new google.maps.Map(document.getElementById('map-canvas'),
+//             mapOptions);
+//          var Geomarker = " " ;
+
+//   var goldStar = {
+//     path: 'M 125,5 155,90 245,90 175,145 200,230 125,180 50,230 75,145 5,90 95,90 z',
+//     fillColor: 'red',
+//     fillOpacity: 0.8,
+//     scale: 0.4,
+//     strokeColor: 'black',
+//     strokeWeight: 14
+//   };
+
+//   var marker = new google.maps.Marker({
+//     position: map.getCenter(),
+//     icon: police,
+//     map: map
+//   });
+
+// }
+// $.ready(star)
+
+
+
+//working code starting back up here
     </script>
+</div>
 <h1>
  <button id="maptrigger">Find My Location! </button> 
 </h1>
