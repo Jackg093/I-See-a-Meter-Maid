@@ -27,7 +27,7 @@ background-color: #CACABC;
 font-size: 40px; 
 font-weight: bold;
 border: 2px solid black;
-
+cursor: pointer;
 }
 
 #maptrigger:active {
@@ -36,9 +36,10 @@ font-size: 43px;
 font-weight: bold;
 border: 2px solid black;
 box-shadow: 5px 5px 2.5px #888888;
+ 
 } 
 
-t
+
 
 table, th, td {
     border: 1px solid black;
