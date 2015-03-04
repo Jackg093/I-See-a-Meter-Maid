@@ -15,6 +15,14 @@
 // disbale require turbolinks
 //= require_tree .
 
+var goldStar = {
+  path: 'M 125,5 155,90 245,90 175,145 200,230 125,180 50,230 75,145 5,90 95,90 z',
+  fillColor: 'red',
+  fillOpacity: 1.2,
+  scale: 0.05,
+  strokeColor: 'black',
+  strokeWeight: 1.25
+};
 
 function initialize() {
 	console.log('initialize');
@@ -27,15 +35,6 @@ function initialize() {
 		mapOptions = window.mapOptions;
 	}
 
-	var goldStar = {
-	  path: 'M 125,5 155,90 245,90 175,145 200,230 125,180 50,230 75,145 5,90 95,90 z',
-	  fillColor: 'red',
-	  fillOpacity: 1.2,
-	  scale: 0.05,
-	  strokeColor: 'black',
-	  strokeWeight: 1.25
-	};
-
 	var canvas = document.getElementById('map-canvas');
 	if (!canvas) { 
 	  console.log("no canvas found");
@@ -45,6 +44,10 @@ function initialize() {
 	var map = new google.maps.Map(canvas, mapOptions);
 	var GeoMarker = new GeolocationMarker(map);
 	GeoMarker.setCircleOptions({fillColor: '#808080'});
+
+	// crosshairs
+	marker = markPosition(map, map.getCenter());
+	marker.bindTo('position', map, 'center');
 
 	// debugging
 	window.geomarker = GeoMarker;
@@ -59,41 +62,33 @@ function initialize() {
 	  if (currentPosition) {
 	  	// I know my position right now
 	  	console.log("I know my position");
-		  map.setCenter(currentPosition);
+	  	map.setCenter(currentPosition);
+
 		  var bounds = GeoMarker.getBounds();
 		  if (bounds) {
 		    map.fitBounds(bounds);
 		  } else {
 		  	console.log("No bounds");
 		  }
-
-		  var marker = new google.maps.Marker({
-		    position: map.getCenter(),
-		    icon: goldStar,
-		    map: map
-		  });
 		} else {
-			// I don't know my position later.
 			console.log("I don't know my position");
-			console.log(currentPosition);
 			google.maps.event.addListenerOnce(GeoMarker, 'position_changed', function() {
-				// this is later
 				console.log("I should know my position by now");
-			    map.setCenter(GeoMarker.getPosition());
+			  	map.setCenter(currentPosition);
+
 			    var bounds = GeoMarker.getBounds();
 			    if (bounds) {
 			      map.fitBounds(bounds);
 			    } else {
 			  	  console.log("No bounds");
 			    }
-
-			    var marker = new google.maps.Marker({
-			      position: map.getCenter(),
-			      icon: goldStar,
-			      map: map
-			    });
 			});
 		}
+	});
+
+	$('body').on('click', '#startrigger', function() {
+		console.log('new button clicked');
+		markPosition(map, map.getCenter());
 	});
 
 	google.maps.event.addListener(GeoMarker, 'geolocation_error', function(e) {
@@ -110,6 +105,19 @@ function initialize() {
 	//   map: map
 	// });
 }
+
+function markPosition(map, position) {
+	map.setCenter(position);
+
+	var marker = new google.maps.Marker({
+		position: map.getCenter(),
+		icon: goldStar,
+		map: map
+	});
+
+	return marker;
+}
+
 //google.maps.event.addDomListener(window, 'load', initialize);
 $(initialize);
 $(document).on('page:load', initialize);

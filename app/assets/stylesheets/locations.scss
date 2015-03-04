@@ -39,6 +39,30 @@ box-shadow: 5px 5px 2.5px #888888;
  
 } 
 
+#startrigger {  
+background-color: #CACABC;
+font-size: 40px; 
+font-weight: bold;
+border: 2px solid black;
+cursor: pointer;
+
+}
+
+
+#startrigger:active {  
+ background-color: yellow;
+font-size: 43px; 
+font-weight: bold;
+border: 2px solid black;
+box-shadow: 5px 5px 2.5px #888888;
+
+}
+
+
+
+
+
+
 
 
 table, th, td {
