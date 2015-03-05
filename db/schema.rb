@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150224184514) do
+ActiveRecord::Schema.define(version: 20150305212302) do
 
   create_table "hp_searches", force: :cascade do |t|
     t.string   "name"
@@ -24,6 +24,13 @@ ActiveRecord::Schema.define(version: 20150224184514) do
     t.string   "address"
     t.float    "latitude"
     t.float    "longitude"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "markers", force: :cascade do |t|
+    t.float    "lat"
+    t.float    "long"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

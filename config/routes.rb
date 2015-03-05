@@ -6,6 +6,9 @@ Rails.application.routes.draw do
     end
   end
 
+  post '/markers' => 'locations#new_marker'
+  get '/markers' => 'locations#markers'
+
   devise_for :users
   resources :hp_searches
 

@@ -27,6 +27,7 @@ var goldStar = {
 function initialize() {
 	console.log('initialize');
 
+	// grab the map options from the page
 	var mapOptions;
 	if (!window.mapOptions) {
 		console.log('no map options');
@@ -35,74 +36,76 @@ function initialize() {
 		mapOptions = window.mapOptions;
 	}
 
+	// grab the map canvas element
 	var canvas = document.getElementById('map-canvas');
 	if (!canvas) { 
 	  console.log("no canvas found");
 	  return;
 	}
 
+	// create the Google Map
 	var map = new google.maps.Map(canvas, mapOptions);
+
+	// grab the markers
+	var marker;
+	for (i = 0; i < window.markers.length; i++) {
+		marker = window.markers[i];
+		position = new google.maps.LatLng(marker[0], marker[1]);
+
+		var marker = new google.maps.Marker({
+			position: position,
+			icon: goldStar,
+			map: map,
+			draggable: false, 
+	    	animation: google.maps.Animation.DROP
+		});
+	}
+
+	// Browser Geolocation Service
 	var GeoMarker = new GeolocationMarker(map);
 	GeoMarker.setCircleOptions({fillColor: '#808080'});
 
-	// crosshairs
-	//map.setCenter(map.getCenter());
+	// Mark crosshairs
 	center = map.getCenter();
-
-	 var reticleImage = new google.maps.MarkerImage(
-	    '/assets/crosshair.png',            // marker image
-	    new google.maps.Size(90, 90),    // marker size
-	    new google.maps.Point(0,0),      // marker origin
-	    new google.maps.Point(39.4, 39.4));    // marker anchor point 39.5 39.5!
-
+	var reticleImage = new google.maps.MarkerImage(
+		'/assets/crosshair.png',               // marker image
+		new google.maps.Size(90, 90),          // marker size
+		new google.maps.Point(0,0),            // marker origin
+		new google.maps.Point(39.4, 39.4));    // marker anchor point 39.5 39.5!
 	var crosshairMarker = new google.maps.Marker({
-		//icon: '/assets/crosshair.png',
 		icon: reticleImage,
 		map: map,
 		position: new google.maps.LatLng(center.k + 15, center.D)
 	});
 	crosshairMarker.bindTo('position', map, 'center');
-	 
     
 	// debugging
 	window.geomarker = GeoMarker;
 	window.map = map;
 
+	// Find my location click handler
 	$('body').on('click', "#maptrigger", function() {
-	  console.log('clicked trigger');
+		console.log('clicked trigger');
 
-	  console.log('current position');
-	  var currentPosition = GeoMarker.getPosition();
+		var currentPosition = GeoMarker.getPosition();
 
-	  if (currentPosition) {
-	  	// I know my position right now
-	  	console.log("I know my position");
-	  	map.setCenter(currentPosition);
-
-		  var bounds = GeoMarker.getBounds();
-		  if (bounds) {
-		    map.fitBounds(bounds);
-		  } else {
-		  	console.log("No bounds");
-		  }
+		if (currentPosition) {
+			console.log("I know my position");
+			map.setCenter(currentPosition);
+			map.fitBounds(GeoMarker.getBounds());
 		} else {
 			console.log("I don't know my position");
 			google.maps.event.addListenerOnce(GeoMarker, 'position_changed', function() {
 				console.log("I should know my position by now");
-			  	map.setCenter(currentPosition);
-
-			    var bounds = GeoMarker.getBounds();
-			    if (bounds) {
-			      map.fitBounds(bounds);
-			    } else {
-			  	  console.log("No bounds");
-			    }
+				map.setCenter(currentPosition);
+				map.fitBounds(GeoMarker.getBounds());
 			});
 		}
 	});
 
+	// Drop a marker click handler
 	$('body').on('click', '#startrigger', function() {
-		console.log('new button clicked');
+		console.log('meter maid clicked');
 		markPosition(map, map.getCenter());
 	});
 
@@ -110,16 +113,8 @@ function initialize() {
 	  alert('There was an error obtaining your position. Message: ' + e.message);
 	});
 
-	//GeoMarker.setMap(map);
-
-	// console.log('create marker');
-	// console.dir(map);
-	// var marker = new google.maps.Marker({
-	//   position: map.getCenter(),
-	//   icon: goldStar,
-	//   map: map
-	// });
 }
+
 //change center icon here (ithink)
 function markPosition(map, position) {
 	map.setCenter(position);
@@ -128,13 +123,20 @@ function markPosition(map, position) {
 		position: map.getCenter(),
 		icon: goldStar,
 		map: map,
-		draggable:true, 
-    	animation: google.maps.Animation.DROP,
- 	// ^^^^^^^^^^^^  unset draggable from true to no longer make map markers dragable.
-   
+		draggable:false, 
+    	animation: google.maps.Animation.DROP
+ 		// ^^^^^^^^^^^^  unset draggable from true to no longer make map markers dragable.
+   		//and get request  
 	});
-
-	return marker;
+	
+	$.ajax({     
+		type: "POST",  
+		url: "/markers",  
+		data: {
+			d:position.D,
+			k:position.k
+		}  
+	});
 }
 
 //google.maps.event.addDomListener(window, 'load', initialize);

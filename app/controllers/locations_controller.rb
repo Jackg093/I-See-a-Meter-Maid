@@ -1,12 +1,13 @@
 class LocationsController < ApplicationController
   before_action :set_location, only: [:show, :edit, :update, :destroy]
-def index
-  if params[:search].present?
-    @locations = Location.near(params[:search], 50, :order => :distance)
-  else
-    @locations = Location.all
+
+  def index
+    if params[:search].present?
+      @locations = Location.near(params[:search], 50, :order => :distance)
+    else
+      @locations = Location.all
+    end
   end
-end
 
   # GET /locations
   # GET /locations.json
@@ -14,9 +15,18 @@ end
   @locations = Location.all
  end
 
+  def markers
+    @markers = Marker.all
+  end
+
+  def new_marker
+    Marker.create(long: params[:d], lat: params[:k])
+    redirect_to :back
+  end
   # GET /locations/1
   # GET /locations/1.json
   def show
+    @markers = Marker.all
   end
 
   # GET /locations/new
