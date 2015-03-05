@@ -48,7 +48,8 @@ function initialize() {
 	// crosshairs
 	marker = markPosition(map, map.getCenter());
 	marker.bindTo('position', map, 'center');
-
+	 
+    
 	// debugging
 	window.geomarker = GeoMarker;
 	window.map = map;
@@ -112,7 +113,12 @@ function markPosition(map, position) {
 	var marker = new google.maps.Marker({
 		position: map.getCenter(),
 		icon: goldStar,
-		map: map
+		map: map,
+		  draggable:true, 
+		   draggable:true,
+    animation: google.maps.Animation.DROP,
+ 	// ^^^^^^^^^^^^  unset draggable from true to no longer make map markers dragable.
+   
 	});
 
 	return marker;
