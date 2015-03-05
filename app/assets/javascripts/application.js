@@ -53,7 +53,7 @@ function initialize() {
 	    '/assets/crosshair.png',            // marker image
 	    new google.maps.Size(90, 90),    // marker size
 	    new google.maps.Point(0,0),      // marker origin
-	    new google.maps.Point(39.5, 39.5));    // marker anchor point
+	    new google.maps.Point(39.4, 39.4));    // marker anchor point 39.5 39.5!
 
 	var crosshairMarker = new google.maps.Marker({
 		//icon: '/assets/crosshair.png',
