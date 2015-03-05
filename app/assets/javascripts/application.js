@@ -46,8 +46,22 @@ function initialize() {
 	GeoMarker.setCircleOptions({fillColor: '#808080'});
 
 	// crosshairs
-	marker = markPosition(map, map.getCenter());
-	marker.bindTo('position', map, 'center');
+	//map.setCenter(map.getCenter());
+	center = map.getCenter();
+
+	 var reticleImage = new google.maps.MarkerImage(
+	    '/assets/crosshair.png',            // marker image
+	    new google.maps.Size(90, 90),    // marker size
+	    new google.maps.Point(0,0),      // marker origin
+	    new google.maps.Point(39.5, 39.5));    // marker anchor point
+
+	var crosshairMarker = new google.maps.Marker({
+		//icon: '/assets/crosshair.png',
+		icon: reticleImage,
+		map: map,
+		position: new google.maps.LatLng(center.k + 15, center.D)
+	});
+	crosshairMarker.bindTo('position', map, 'center');
 	 
     
 	// debugging
@@ -106,7 +120,7 @@ function initialize() {
 	//   map: map
 	// });
 }
-
+//change center icon here (ithink)
 function markPosition(map, position) {
 	map.setCenter(position);
 
@@ -114,9 +128,8 @@ function markPosition(map, position) {
 		position: map.getCenter(),
 		icon: goldStar,
 		map: map,
-		  draggable:true, 
-		   draggable:true,
-    animation: google.maps.Animation.DROP,
+		draggable:true, 
+    	animation: google.maps.Animation.DROP,
  	// ^^^^^^^^^^^^  unset draggable from true to no longer make map markers dragable.
    
 	});

@@ -1,7 +1,8 @@
 <p id="notice"><%= notice %></p>
-
  <!--I keep breaking it get help-->
+<!-- <p id="centertagger">o</p> trying to float image on top of map -->
 <%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@location.latitude}%2C#{@location.longitude}" %>
+
 <div id="map-canvas"></div>
    <script type="text/javascript">
       function initialize() {
@@ -10,6 +11,10 @@
            center: { lat:<%=@location.latitude  %>, lng: <%= @location.longitude %>},
            zoom: 8
          };
+
+
+
+
          // TURBO LINKS WERE CAUSING ***ALOT*** OF PROBLEMS DO NOT REINTEGRATE.
       //   var goldStar = {
       //     path: 'M 125,5 155,90 245,90 175,145 200,230 125,180 50,230 75,145 5,90 95,90 z',
