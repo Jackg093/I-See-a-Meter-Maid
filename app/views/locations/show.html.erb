@@ -1,7 +1,9 @@
 <p id="notice"><%= notice %></p>
  <!--I keep breaking it get help-->
 <!-- <p id="centertagger">o</p> trying to float image on top of map -->
-<%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@location.latitude}%2C#{@location.longitude}" %>
+
+
+<!-- <%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@location.latitude}%2C#{@location.longitude}" %>     TOOK THIS OUT IT IS THE GECODER MAP UNCOMMET TO USE AS A DEVELOPER TOOL -->
 
 <div id="map-canvas"></div>
 <%= javascript_tag do %>
