@@ -1,7 +1,10 @@
 
+
+
+
 body {
   background-image: url("earth.jpg");
-  background-repeat: no-repeat;
+  background-repeat: repeat;
   color: #333;
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 19px;
@@ -26,9 +29,9 @@ pre {
 }
 
 a {
-  color: #000;
+  color: black;
   &:visited {
-    color: #666;
+    color: black;
   }
   &:hover {
     color: #fff;
@@ -36,6 +39,7 @@ a {
 
   }
 }
+
 
 div {
   &.field, &.actions {
@@ -73,7 +77,8 @@ div {
   }
   ul li {
     font-size: 12px;
-    list-style: square;
+    list-style: none;
     text-align: center;
+  
   }
 }  
