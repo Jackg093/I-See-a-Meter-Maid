@@ -23,9 +23,13 @@
 <% end %>
 
 </div>
-<h1>
- <button id="maptrigger">Find My Location! </button>  <button id="startrigger">I See a meter-maid! </button>  
+<h1>  
+  
 </h1>
+
+<h2>
+ <button id="maptrigger">Find My Location! </button>  <button id="startrigger">I See a meter-maid! </button>  
+</h2>
 <% nearbys = @location.nearbys(10) %>
 <% if nearbys %> 
   <h3>Nearby locations</h3>
