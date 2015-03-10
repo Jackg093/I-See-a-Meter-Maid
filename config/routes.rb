@@ -1,11 +1,19 @@
+
+
+
 Rails.application.routes.draw do
   resources :locations do 
     collection do 
       get :maps
-      
+     
+   
     end
+ 
   end
-
+ # You can have the root of your site routed with "root"
+   devise_scope :user do
+   root 'devise/sessions#new'  
+  end
   post '/markers' => 'locations#new_marker'
   get '/markers' => 'locations#markers'
 
